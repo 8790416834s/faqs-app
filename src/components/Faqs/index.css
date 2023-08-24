@@ -1,0 +1,23 @@
+.main-container {
+  background-color: #f1f5f8;
+  height: 150vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+}
+.heading {
+  text-align: center;
+  color: #cb8805;
+}
+.card-container {
+  background-color: #ffffff;
+  height: auto;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
