@@ -1,34 +1,40 @@
+import {Component} from 'react'
 import './index.css'
 
-const FaqItem = props => {
-  const {faqsDetails, plusIcon, isPlus} = props
-  const {id, questionText, answerText} = faqsDetails
+class FaqItem extends Component {
+  state = {iconIsClicked: false}
 
-  const plusOrMinus = isPlus
-    ? 'https://assets.ccbp.in/frontend/react-js/faqs-minus-icon-img.png'
-    : 'https://assets.ccbp.in/frontend/react-js/faqs-plus-icon-img.png'
-
-  const plusOrMinusName = isPlus ? 'plus' : 'minus'
-
-  const onPlus = () => {
-    plusIcon(id)
+  onPlus = () => {
+    this.setState(prevState => ({iconIsClicked: !prevState.iconIsClicked}))
   }
 
-  return (
-    <li className="list-item">
-      <div className="question-container">
-        <h1 className="question">{questionText}</h1>
-        <button type="button" onClick={onPlus} className="button">
-          <img src={plusOrMinus} alt={plusOrMinusName} />
-        </button>
-      </div>
-      {isPlus && (
-        <div className="answer-container">
-          <hr className="horizontal-line" />
-          <p>{answerText}</p>
+  render() {
+    const {iconIsClicked} = this.state
+    const {faqsDetails} = this.props
+    const {questionText, answerText} = faqsDetails
+
+    const plusOrMinus = iconIsClicked
+      ? 'https://assets.ccbp.in/frontend/react-js/faqs-minus-icon-img.png'
+      : 'https://assets.ccbp.in/frontend/react-js/faqs-plus-icon-img.png'
+
+    const plusOrMinusName = iconIsClicked ? 'minus' : 'plus'
+
+    return (
+      <li className="list-item">
+        <div className="question-container">
+          <h1 className="question">{questionText}</h1>
+          <button type="button" onClick={this.onPlus} className="button">
+            <img src={plusOrMinus} alt={plusOrMinusName} />
+          </button>
         </div>
-      )}
-    </li>
-  )
+        {iconIsClicked === true && (
+          <div className="answer-container">
+            <hr className="horizontal-line" />
+            <p>{answerText}</p>
+          </div>
+        )}
+      </li>
+    )
+  }
 }
 export default FaqItem
